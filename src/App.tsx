@@ -14,7 +14,10 @@ function App() {
       <header className='header'>
         <Header />
       </header>
-      <section>
+      <section className='p_10'>
+        <button className='filter_button'>
+          <i className="fa-solid fa-filter"></i>
+        </button>
         <Routes>
           <Route path="/" element={<Products />} />
           {/* <Route path="/productview/:id" element={<Product singleProduct={} />} /> */}

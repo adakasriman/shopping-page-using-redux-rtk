@@ -7,10 +7,10 @@ export const Products: React.FC = () => {
     console.log("data", data?.products);
 
     return (
-        <div>
+        <div  className="products">
             {
                 data?.products.map(product => {
-                    return <div key={product.id}>
+                    return <div key={product.id}  className='product'>
                         <Product singleProduct={product} />
                     </div>
                 })
