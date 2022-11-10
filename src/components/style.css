@@ -11,6 +11,10 @@
       text-align: center;
   }
 
+  .line_through {
+      text-decoration-line: line-through;
+  }
+
 
 
   /* Flex Classes */
@@ -114,10 +118,13 @@
       padding: 0 20px;
   }
 
+  .pt_0 {
+      padding-top: 0;
+  }
+
   .m_10 {
       margin: 10px;
   }
-
 
 
   .m_5 {
@@ -132,9 +139,15 @@
       margin: 20px;
   }
 
+
+  .mt_0 {
+      margin-top: 0;
+  }
+
   .mt_10 {
       margin-top: 10px;
   }
+
 
   .mt_30 {
       margin-top: 30px;
@@ -251,6 +264,15 @@
   /* /curdOperations */
 
 
+  /* section */
+
+  section {
+      background: #f2f2f2;
+  }
+
+  /* /section */
+
+
   /* filter button */
   .filter_button {
       position: fixed;
@@ -263,8 +285,8 @@
   }
 
   .filter_button i {
-    font-size: 30px;
-    color: #fff;
+      font-size: 30px;
+      color: #fff;
   }
 
   /*/ filter button */
@@ -427,20 +449,93 @@
 
   .products .product {
       margin-bottom: 10px;
+      width: 24.4%;
+      padding: 5px 10px 10px 10px;
   }
 
-  /* .products .product .sliderImgs {
+  .products .product:hover {
+      background: #fff;
+      border-bottom-left-radius: 29px;
+      border-bottom-right-radius: 29px;
+  }
+
+  .products .product:hover .product_title {
+      color: blue;
+  }
+
+  .products .product:hover .stock_count {
+      font-size: 19px;
+      font-weight: 600;
+  }
+
+  .products .product .product_title {
+      font-size: 18px;
+      font-weight: 500;
+  }
+
+
+  .products .product img {
+      /* width: 100%;
+      height: 40%; */
       width: 100%;
-      height: 40%;
+      height: 25vh;
+  }
 
-  } */
+  .products .product .rating {
+      margin: 5px 0;
+      background: #26a541;
+      width: 25%;
+      padding: 1px 5px;
+      border-radius: 7px;
+      color: #fff;
+  }
 
-  .your-app .rsis-container {
+  .products .product .rating i {
+      margin-left: 3px;
+      color: #fff;
+  }
+
+  .products .product .stock_count {
+      font-size: 19px;
+      font-weight: 500;
+  }
+
+  .products .product .stock_count span {
+      position: relative;
+      top: -10px;
+      right: 10px;
+      font-size: 13px;
+      background:#ff6666;
+      padding: 2px 4px;
+      border-radius: 50%;
+      color: #fff;
+  }
+
+  .products .product .price {
+      font-weight: 600;
+      font-size: 18px;
+  }
+
+  .products .product .price i {
+      font-size: 15px;
+  }
+
+  .products .product .price span {
+      font-size: 15px;
+      font-weight: lighter;
+  }
+
+
+  .products .product .discountPercentage {
+    font-size: 15px;
+    color: #26a541;
+  }
+
+  /* .your-app .rsis-container {
       width: 23vw;
   }
 
   .your-app .rsis-image {
       background-size: contain !important;
       width: 23%;
-
-  }
+  } */
