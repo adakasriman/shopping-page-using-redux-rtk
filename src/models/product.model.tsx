@@ -1,6 +1,6 @@
 
 
-export interface Product {
+export interface ProductArray {
     id: number,
     title: string,
     description: string,
@@ -14,3 +14,12 @@ export interface Product {
     images: string[]
 }
 
+
+
+
+export interface ApiDataObject {
+    "products": ProductArray[],
+    "total": number,
+    "skip": number,
+    "limit": number
+}

@@ -145,16 +145,42 @@
 
   .header {
       width: 100%;
-      background: #ccc;
+      background: #2a978b;
       position: sticky;
       z-index: 99;
       top: 0;
+      padding: 10px 10px;
   }
 
-  .project_title {
+  .header .title i {
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+}
+
+  .header .title .project_title {
+      font-weight: 600;
       cursor: pointer;
+      color: #fff;
   }
 
+  .search_btn input {
+      width: 30vw;
+      padding: 5px 60px 5px 10px;
+      border: none;
+      border-radius: 10px;
+  }
+
+  .search_btn button {
+      background: none;
+      border: none;
+  }
+
+  .search_btn button i {
+      position: relative;
+      right: 20px;
+      color: #2a978b;
+  }
 
 
   /* curdOperations */
@@ -217,6 +243,7 @@
 
   .cart_button {
       background: none;
+      color: #fff;
       border: none;
   }
 

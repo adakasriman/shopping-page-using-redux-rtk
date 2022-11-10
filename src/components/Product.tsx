@@ -1,7 +1,15 @@
 import React from 'react'
+import { ProductArray } from '../models/product.model'
 
-export const Product: React.FC = () => {
+interface Props {
+    singleProduct: ProductArray
+}
+export const Product: React.FC<Props> = ({ singleProduct }) => {
     return (
-        <div></div>
+        <div>
+            <div>
+                {singleProduct.id}
+            </div>
+        </div>
     )
 }

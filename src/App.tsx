@@ -5,8 +5,10 @@ import { Routes, Route } from "react-router-dom";
 import { Products } from './components/Products';
 import { Product } from './components/Product';
 import { Categories } from './components/Categories';
+import { useProductQuery } from './services/productsApi';
 
 function App() {
+
   return (
     <div className="App">
       <header className='header'>
@@ -15,7 +17,7 @@ function App() {
       <section>
         <Routes>
           <Route path="/" element={<Products />} />
-          <Route path="/productview/:id" element={<Product />} />
+          {/* <Route path="/productview/:id" element={<Product singleProduct={} />} /> */}
           <Route path="/newproduct" element={<Categories />} />
         </Routes>
       </section>
