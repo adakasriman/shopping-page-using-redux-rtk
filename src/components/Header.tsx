@@ -1,12 +1,23 @@
 import React, { useState } from 'react'
 // import { useSearchQuery } from '../services/productsApi';
 import './style.css'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 export const Header: React.FC = () => {
-    const [searchData, setSearchData] = useState<string>();
+    const [searchParams, SetSearchParams] = useSearchParams();
+    const [searchData, setSearchData] = useState<string>("")
+    const [query, setQuery] = useState<string | any>(searchParams.get('q'))
+    // const [query, setQuery] = useState<string>("");
 
-    const searchEvent = () => {
-        // useSearchQuery(searchData);
+    const navigate = useNavigate();
+
+    const searchEvent = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        // <Navigate to="/products/search" state={{ search: searchData }} />
+        navigate('/products/search', { state : { query : searchData}})
+       
+        // navigate(`/products/${SetSearchParams({q : searchData })}`);
     }
 
     return (

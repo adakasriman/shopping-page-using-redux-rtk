@@ -19,8 +19,8 @@ export const productsApi = createApi({  // created productsApi by using createAp
             query: () => `/categories`,  //getting data of id
             providesTags: ['product']  // updating data 
         }),
-        search: builder.query<string[], any>({
-            query: (searchItem) => `/search?q=${searchItem}`,  //getting data of id
+        search: builder.query<ApiDataObject, string>({
+            query: (searchItem) => `/products/search?q=${searchItem}`,  //getting data of search item
             providesTags: ['product']  // updating data 
         }),
     })

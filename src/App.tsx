@@ -7,6 +7,7 @@ import { Product } from './components/Product';
 import { Categories } from './components/Categories';
 import { useProductQuery } from './services/productsApi';
 import { ProductView } from './components/ProductView';
+import { Search } from './components/Search';
 // import { useParams, useNavigate } from 'react-router-dom'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<Products />} />
           <Route path="/products" element={<Products />} />
           <Route path='/products/product/:id' element={<ProductView />} />
+          <Route path='/products/search' element={<Search />} />
           {/* <Route path="/productview/:id" element={<Product singleProduct={} />} /> */}
           <Route path="/newproduct" element={<Categories />} />
         </Routes>
