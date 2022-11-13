@@ -5,9 +5,9 @@ import { useParams, useNavigate, useLocation, useSearchParams, } from 'react-rou
 
 
 export const Products: React.FC = () => {
-    const { data, error, isLoading, isFetching, isSuccess } = useProductsQuery();    
+    const { data, error, isLoading, isFetching, isSuccess } = useProductsQuery();
     console.log(data);
-    
+
     const { id } = useParams();
 
     const navigate = useNavigate();
@@ -18,8 +18,15 @@ export const Products: React.FC = () => {
         navigate(`/products/product/${id}`);
     }
 
+    const categories = () => {
+        navigate(`/products/categories`);
+    }
+
     return (
         <div className="products bg_color-f2f2f2">
+            <button className='filter_button' onClick={() => categories()}>
+                <i className="fa-solid fa-filter"></i>
+            </button>
             {
                 data?.products.map(product => {
                     return <div key={product.id} className='product'>

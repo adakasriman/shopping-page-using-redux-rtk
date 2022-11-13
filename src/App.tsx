@@ -8,6 +8,7 @@ import { Categories } from './components/Categories';
 import { useProductQuery } from './services/productsApi';
 import { ProductView } from './components/ProductView';
 import { Search } from './components/Search';
+import { Category } from './components/Category';
 // import { useParams, useNavigate } from 'react-router-dom'
 
 function App() {
@@ -24,16 +25,15 @@ function App() {
         <Header />
       </header>
       <section className='p_10'>
-        {/* <button className='filter_button'>
-          <i className="fa-solid fa-filter"></i>
-        </button> */}
+
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/products" element={<Products />} />
           <Route path='/products/product/:id' element={<ProductView />} />
           <Route path='/products/search' element={<Search />} />
           {/* <Route path="/productview/:id" element={<Product singleProduct={} />} /> */}
-          <Route path="/newproduct" element={<Categories />} />
+          <Route path="/products/categories" element={<Categories />} />
+          <Route path="/products/category/:category" element={<Category />} />
         </Routes>
       </section>
       {/* <Categories /> */}

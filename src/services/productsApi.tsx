@@ -12,18 +12,22 @@ export const productsApi = createApi({  // created productsApi by using createAp
             providesTags: ['product']  // updating data 
         }),
         product: builder.query<ProductArray, any>({
-            query: (id) => `products/${id}`,  //getting data of id
+            query: (id) => `/products/${id}`,  //getting data of id
             providesTags: ['product']  // updating data 
         }),
         categories: builder.query<string[], void>({
-            query: () => `/categories`,  //getting data of id
+            query: () => `/products/categories`,  //getting data of id
             providesTags: ['product']  // updating data 
         }),
         search: builder.query<ApiDataObject, string>({
             query: (searchItem) => `/products/search?q=${searchItem}`,  //getting data of search item
             providesTags: ['product']  // updating data 
         }),
+        category: builder.query<ApiDataObject, any>({
+            query: (searchItem) => `/products/category/${searchItem}`,  //getting data of search item
+            providesTags: ['product']  // updating data 
+        }),
     })
 })
 
-export const { useProductsQuery, useProductQuery, useCategoriesQuery, useSearchQuery } = productsApi;
+export const { useProductsQuery, useProductQuery, useCategoriesQuery, useSearchQuery, useCategoryQuery } = productsApi;
