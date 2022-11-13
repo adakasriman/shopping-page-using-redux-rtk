@@ -4,28 +4,31 @@ import { useParams, useNavigate, useLocation, useSearchParams } from 'react-rout
 import { Product } from './Product';
 
 export const Search: React.FC = () => {
-    const [searchParams, SetSearchParams] = useSearchParams();
-    // const [queryData, setQueryData] = useState<string | any>(searchParams.get('q'))
-    const navigate = useNavigate();
-
     const search = useLocation().search;
 
     const { state } = useLocation();
     const { query } = state || {};
+    const [searchParams, SetSearchParams] = useSearchParams();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (query) {
             SetSearchParams({ q: query });
         }
+        
+        if (query == "") {
+            navigate(`/products`);
+        }
+    }, [query]);
 
-    }, [])
     const queryname: any = new URLSearchParams(search).get('q');
     const { data } = useSearchQuery(queryname);
 
     const viewProduct = (id: number) => {
         navigate(`/products/product/${id}`);
     }
-    
+
     return (
         <div className='products bg_color-f2f2f2'>
             {

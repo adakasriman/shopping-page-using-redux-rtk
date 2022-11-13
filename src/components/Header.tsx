@@ -6,7 +6,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 export const Header: React.FC = () => {
     const [searchParams, SetSearchParams] = useSearchParams();
     const [searchData, setSearchData] = useState<string>("")
-    const [query, setQuery] = useState<string | any>(searchParams.get('q'))
+    // const [query, setQuery] = useState<string | any>(searchParams.get('q'))
     // const [query, setQuery] = useState<string>("");
 
     const navigate = useNavigate();
