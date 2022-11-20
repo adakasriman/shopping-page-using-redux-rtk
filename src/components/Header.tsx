@@ -16,15 +16,19 @@ export const Header: React.FC = () => {
 
         // <Navigate to="/products/search" state={{ search: searchData }} />
         navigate('/products/search', { state : { query : searchData}})
-       
+        setSearchData("");
         // navigate(`/products/${SetSearchParams({q : searchData })}`);
+    }
+
+    const backToProducts = () => {
+        navigate(`/products`);
     }
 
     return (
         <div className='displayFlex_spacebetween'>
             <div className='displayFlex_center title' style={{ gap: "10px" }}>
-                <i className="fa-regular fa-shop"></i>
-                <a className='project_title'>MY SHOPE</a>
+                <i className="fa-regular fa-shop" onClick={() => backToProducts()}></i>
+                <a className='project_title' onClick={() => backToProducts()}>MY SHOPE</a>
             </div>
             <form action="" onSubmit={searchEvent}>
                 <div className='search_btn'>
@@ -43,7 +47,7 @@ export const Header: React.FC = () => {
                         <div><i className="fa-solid fa-cart-shopping"></i></div>
                         <div className='cartItems'></div>
                     </button>
-                    <button className='addProduct'>Add New</button>
+                    <button className='addProduct' onClick={() => navigate(`/products/add`)}>Add New</button>
                 </div>
 
             </div>

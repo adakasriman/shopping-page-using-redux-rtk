@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useSearchQuery } from '../services/productsApi';
 import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { Product } from './Product';
+import { ApiDataObject } from '../models/product.model';
 
 export const Search: React.FC = () => {
+    const [productData, setProductData] = useState<ApiDataObject>();
     const search = useLocation().search;
 
     const { state } = useLocation();
@@ -16,7 +18,7 @@ export const Search: React.FC = () => {
         if (query) {
             SetSearchParams({ q: query });
         }
-        
+
         if (query == "") {
             navigate(`/products`);
         }
@@ -24,19 +26,21 @@ export const Search: React.FC = () => {
 
     const queryname: any = new URLSearchParams(search).get('q');
     const { data } = useSearchQuery(queryname);
+    useEffect(() => {
+        if (data) {
+            setProductData(data);
+        }
 
-    const viewProduct = (id: number) => {
-        navigate(`/products/product/${id}`);
-    }
+    }, [data])
+
+
 
     return (
         <div className='products bg_color-f2f2f2'>
             {
-                data?.products.length ? data?.products.map(product => {
+                productData?.products.length ? data?.products.map(product => {
                     return <div key={product.id} className='product'>
-                        <a onClick={() => viewProduct(product.id)}>
-                            <Product singleProduct={product} />
-                        </a>
+                        <Product singleProduct={product} apiData={productData} setProductData={setProductData} />
                     </div>
                 }) : <div>
                     <h3 className='no_data'>No Data</h3>

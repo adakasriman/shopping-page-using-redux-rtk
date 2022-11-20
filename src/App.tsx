@@ -9,7 +9,8 @@ import { useProductQuery } from './services/productsApi';
 import { ProductView } from './components/ProductView';
 import { Search } from './components/Search';
 import { Category } from './components/Category';
-// import { useParams, useNavigate } from 'react-router-dom'
+import { AddProduct } from './components/AddProduct';
+// import { useParams, useNavigate } from 'react-router-dom';
 
 function App() {
   // const { name } = useParams();
@@ -31,9 +32,9 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path='/products/product/:id' element={<ProductView />} />
           <Route path='/products/search' element={<Search />} />
-          {/* <Route path="/productview/:id" element={<Product singleProduct={} />} /> */}
           <Route path="/products/categories" element={<Categories />} />
           <Route path="/products/category/:category" element={<Category />} />
+          <Route path="/products/add" element={<AddProduct />} />
         </Routes>
       </section>
       {/* <Categories /> */}

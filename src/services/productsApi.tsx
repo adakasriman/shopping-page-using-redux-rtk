@@ -5,13 +5,13 @@ import { ApiDataObject, ProductArray } from "../models/product.model";
 export const productsApi = createApi({  // created productsApi by using createApi
     reducerPath: "productsApi",  // reducerPath is productsApi
     baseQuery: fetchBaseQuery({ baseUrl: "https://dummyjson.com" }),
-    tagTypes: ["product"],
+    tagTypes: ['product'],
     endpoints: (builder) => ({  // using builder can create enpoints
         products: builder.query<ApiDataObject, void>({
             query: () => '/products', // contacts is end point of the server
             providesTags: ['product']  // updating data 
         }),
-        product: builder.query<ProductArray, any>({
+        product: builder.query<ProductArray, string | undefined>({
             query: (id) => `/products/${id}`,  //getting data of id
             providesTags: ['product']  // updating data 
         }),
@@ -20,14 +20,43 @@ export const productsApi = createApi({  // created productsApi by using createAp
             providesTags: ['product']  // updating data 
         }),
         search: builder.query<ApiDataObject, string>({
-            query: (searchItem) => `/products/search?q=${searchItem}`,  //getting data of search item
+            query: (searchItem: string) => `/products/search?q=${searchItem}`,  //getting data of search item
             providesTags: ['product']  // updating data 
         }),
-        category: builder.query<ApiDataObject, any>({
+        category: builder.query<ApiDataObject, string | undefined>({
             query: (searchItem) => `/products/category/${searchItem}`,  //getting data of search item
             providesTags: ['product']  // updating data 
+        }),
+        // serchFilter: builder.query<ApiDataObject, any>({
+        //     query: (searchItems: {}) => `/products?limit=${searchItems.limit}&skip=${searchItems.skip}&select=${searchItems.title},${searchItems.price}`,
+
+        //     //getting data of search item
+        //     providesTags: ['product']  // updating data 
+        // }),
+        addProduct: builder.mutation<void /*addContact is used send new record to the server*/, any /* Contact is interface of the new record */>({
+            query: (product: any)/*new record*/ => ({ // contact is new record
+                url: '/products/add',
+                method: "POST",
+                body: product
+            }),
+            invalidatesTags: ['product'] // updating data 
+        }),
+        edit: builder.mutation<void, any>({
+            query: (product: any)/*new record*/ => ({ // contact is new record
+                url: `/products/${product.id}`,
+                method: "POST",
+                body: product
+            }),
+            invalidatesTags: ['product'] // updating data 
+        }),
+        delete: builder.mutation<ProductArray, number>({
+            query: (id)/*new record*/ => ({ // contact is new record
+                url: `/products/${id}`,
+                method: "DELETE",
+            }),
+            // invalidatesTags: ['product'] // updating data 
         }),
     })
 })
 
-export const { useProductsQuery, useProductQuery, useCategoriesQuery, useSearchQuery, useCategoryQuery } = productsApi;
+export const { useProductsQuery, useProductQuery, useCategoriesQuery, useSearchQuery, useCategoryQuery, useAddProductMutation, useEditMutation, useDeleteMutation } = productsApi;

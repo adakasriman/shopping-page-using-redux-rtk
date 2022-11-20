@@ -2,22 +2,31 @@ import React, { useState, useEffect } from 'react'
 import { useProductsQuery, useSearchQuery } from '../services/productsApi';
 import { Product, } from './Product';
 import { useParams, useNavigate, useLocation, useSearchParams, } from 'react-router-dom';
+import { ApiDataObject } from '../models/product.model';
 
 
 export const Products: React.FC = () => {
+    const [productData, setProductData] = useState<ApiDataObject>();
     const { data, error, isLoading, isFetching, isSuccess } = useProductsQuery();
-    console.log(data);
+    useEffect(() => {
+        if(data){
+            setProductData(data);
+        }
 
-    const { id } = useParams();
+    }, [data])
+    
+
+    const search = useLocation().search;
+
+    const { state } = useLocation();
+    const { query } = state || {};
+    // const [searchParams, SetSearchParams] = useSearchParams();
+
+    // const { id } = useParams();
 
     const navigate = useNavigate();
 
-
-
-    const viewProduct = (id: number) => {
-        navigate(`/products/product/${id}`);
-    }
-
+    // SetSearchParams({ q: query });
     const categories = () => {
         navigate(`/products/categories`);
     }
@@ -28,11 +37,15 @@ export const Products: React.FC = () => {
                 <i className="fa-solid fa-filter"></i>
             </button>
             {
-                data?.products.map(product => {
+                productData?.products.map((product) => {
                     return <div key={product.id} className='product'>
-                        <a onClick={() => viewProduct(product.id)}>
-                            <Product singleProduct={product} />
-                        </a>
+                        {
+                            product?.isDeleted ?
+
+                                <></> : <a>
+                                    <Product singleProduct={product} apiData={productData}  setProductData={setProductData} />
+                                </a>
+                        }
                     </div>
                 })
             }

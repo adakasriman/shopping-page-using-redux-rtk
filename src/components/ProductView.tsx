@@ -1,12 +1,19 @@
 import React from 'react';
 import SimpleImageSlider from "react-simple-image-slider";
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useProductQuery } from '../services/productsApi';
 
 export const ProductView: React.FC = () => {
-    const { id } = useParams();
+    const { id } = useParams<string>();
     const { data } = useProductQuery(id);
+    // debugger
     console.log(data)
+
+    const navigate = useNavigate();
+
+    const backToProducts = () => {
+        navigate(`/products`);
+    }
 
     return (
         <div className='product_view'>
@@ -53,6 +60,9 @@ export const ProductView: React.FC = () => {
                         <div className='cartAndAdd_btn'>
                             <button>Add To Cart</button>
                             <button>Buy Now</button>
+                        </div>
+                        <div className='cartAndAdd_btn'>
+                            <button onClick={() => backToProducts()}>Back to Products</button>
                         </div>
                     </div>
                 </div>
