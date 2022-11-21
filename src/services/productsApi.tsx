@@ -41,13 +41,16 @@ export const productsApi = createApi({  // created productsApi by using createAp
             }),
             invalidatesTags: ['product'] // updating data 
         }),
-        edit: builder.mutation<void, any>({
+        edit: builder.mutation<ProductArray, any>({
             query: (product: any)/*new record*/ => ({ // contact is new record
                 url: `/products/${product.id}`,
-                method: "POST",
-                body: product
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: product?.title
+                })
             }),
-            invalidatesTags: ['product'] // updating data 
+            // invalidatesTags: ['product'] // updating data 
         }),
         delete: builder.mutation<ProductArray, number>({
             query: (id)/*new record*/ => ({ // contact is new record

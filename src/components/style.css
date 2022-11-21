@@ -28,6 +28,10 @@
       flex-direction: row;
   }
 
+  .width_100 {
+      width: 100%;
+  }
+
   .width_50 {
       width: 50%;
   }
@@ -169,6 +173,10 @@
       margin-top: 30px;
   }
 
+
+  .color_2a978b {
+      color: #2a978b;
+  }
 
   /* close: paddings and margins */
 
@@ -342,20 +350,42 @@
 
 
   .cartView {
-      display: flex;
+      /* display: flex;
       align-items: center;
       flex-wrap: wrap;
-      gap: 30px;
+      gap: 30px; */
+  }
+
+
+  .cartView form {
+      width: 100%;
   }
 
   .cartView .item {
-      width: 44%;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      text-align: left;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
   }
 
-  .cartView h5 {
-      height: 30px;
-      overflow-y: scroll;
+  .cartView input {
+      padding: 10px 20px;
+      border-radius: 7px;
+      border: 1px solid #26a541;
   }
+
+  .cartView button {
+      padding: 10px 20px;
+      border-radius: 7px;
+      background: #4d4dff;
+      color: #f2f2f2;
+      float: right;
+  }
+
+
 
   /* .cartView .item{
     width: 45%;

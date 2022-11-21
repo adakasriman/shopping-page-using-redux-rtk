@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ApiDataObject, ProductArray } from '../models/product.model';
-import { useDeleteMutation } from '../services/productsApi';
+import { useDeleteMutation, useEditMutation } from '../services/productsApi';
 import { useParams, useNavigate, useLocation, useSearchParams, } from 'react-router-dom';
+import { AddProduct } from './AddProduct';
+import { FieldValues, useForm } from 'react-hook-form';
+import { Popup } from './Popup';
 
 
 interface Props {
@@ -9,25 +12,87 @@ interface Props {
     setProductData: React.Dispatch<React.SetStateAction<ApiDataObject | undefined>>,
     apiData: ApiDataObject
 }
-export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiData }) => {
-    const [deletePost, response] = useDeleteMutation()
 
+
+// close:  edit type
+
+export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiData }) => {
     const navigate = useNavigate();
+    const [deletePost, response] = useDeleteMutation();
+    const [updateProduct, updateResponse] = useEditMutation();
+
+
+
+    // edit 
+    const [updateItem, setUpdateItem] = useState<string>();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [product, setProduct] = useState<any>();
+
+    // const { register, handleSubmit, setValue, reset } = useForm({
+    //     mode: "onChange",
+    //     defaultValues: {
+    //         productDetails: product
+    //     }
+    // });
+
+    // close
     useEffect(() => {
         apiData = JSON.parse(JSON.stringify(apiData));
         if (response?.data?.isDeleted == true) {
             const index = apiData.products.findIndex((item: any) => item.id == response?.data?.id);
-            console.log(index);
             if (index > -1) { // only splice array when item is found
                 apiData.products.splice(index, 1); // 2nd parameter means remove one item only
             }
             setProductData(apiData);
         }
+
+
     }, [response?.data])
+
+    useEffect(() => {
+        apiData = JSON.parse(JSON.stringify(apiData));
+        if (updateResponse?.data?.id) {
+            const index = apiData.products.findIndex((item: any) => item.id == updateResponse?.data?.id);
+            if (index > -1) { // only splice array when item is found
+                apiData.products.splice(index, 1,updateResponse?.data); // 2nd parameter means remove one item only
+            }
+            setProductData(apiData);
+
+        }
+        
+    }, [updateResponse?.data])
 
     const viewProduct = (id: number) => {
         navigate(`/products/product/${id}`);
     }
+
+    // edit page
+
+
+    function editProduct(id: number, product: ProductArray) {
+        let editData = {
+            id: product?.id,
+            title: product?.title
+        }
+        setProduct(editData);
+        setUpdateItem(product?.title);
+        setIsOpen(!isOpen);
+    }
+    const onSubmit = async (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        let editProduct = {
+            id: product?.id,
+            title: updateItem
+        };
+
+        updateProduct(editProduct);
+        setIsOpen(!isOpen);
+
+        // await addProduct(product);
+    };
+
+
+    // close: edit page
 
     return (
         <div>
@@ -54,8 +119,50 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
             </div >
             <div className='displayFlex_spacebetween gap_15 mt_10'>
                 <div className="delete cursor-pointer" onClick={() => deletePost(singleProduct?.id)}> Delete</div>
-                <div className="edit cursor-pointer">Edit</div>
+                <div className="edit cursor-pointer" onClick={() => editProduct(singleProduct?.id, singleProduct)}>Edit</div>
             </div>
+            {
+                isOpen && <Popup content={
+                    <div className='width_100'>
+                        <h3 className='text_center color_2a978b'>Update product</h3>
+                        <hr />
+                        <div className='cartView'>
+                            <form onSubmit={onSubmit}>
+                                <div className='item'>
+                                    <label>Title</label>
+                                    <input type="text" value={updateItem} onChange={(e) => setUpdateItem((e.target.value))} name="title" />
+                                </div>
+                                {/* <div className='item'>
+                                    <label>Price</label>
+                                    <input type="text" {...register("productDetails.price")} name="price" />
+                                </div>
+                                <div className='item'>
+                                    <label>brand</label>
+                                    <input type="text" {...register("productDetails.brand")} name="brand" />
+                                </div>
+                                <div className='item'>
+                                    <label>Stock</label>
+                                    <input type="text" {...register("productDetails.stock")} name="stock" />
+                                </div>
+                                <div className='item'>
+                                    <label>Rating</label>
+                                    <input type="text" {...register("productDetails.rating")} name="rating" />
+                                </div>
+                                <div className='item'>
+                                    <label>Category</label>
+                                    <input type="text" {...register("productDetails.category")} name="category" />
+                                </div>
+                                <div className='item'>
+                                    <label>Description</label>
+                                    <textarea {...register("productDetails.description")} name="description" />
+                                </div> */}
+
+                                <button type='submit'>Update</button>
+
+                            </form>
+                        </div>
+                    </div>} handleClose={editProduct} />
+            }
         </div>
     )
 }
