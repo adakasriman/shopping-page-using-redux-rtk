@@ -5,16 +5,18 @@ import { useParams, useNavigate, useLocation, useSearchParams, } from 'react-rou
 import { ApiDataObject } from '../models/product.model';
 
 
+
+
 export const Products: React.FC = () => {
     const [productData, setProductData] = useState<ApiDataObject>();
     const { data, error, isLoading, isFetching, isSuccess } = useProductsQuery();
     useEffect(() => {
-        if(data){
+        if (data) {
             setProductData(data);
         }
 
     }, [data])
-    
+
 
     const search = useLocation().search;
 
@@ -29,6 +31,7 @@ export const Products: React.FC = () => {
     // SetSearchParams({ q: query });
     const categories = () => {
         navigate(`/products/categories`);
+        // navigate(`/filter`);
     }
 
     return (
@@ -43,7 +46,7 @@ export const Products: React.FC = () => {
                             product?.isDeleted ?
 
                                 <></> : <a>
-                                    <Product singleProduct={product} apiData={productData}  setProductData={setProductData} />
+                                    <Product singleProduct={product} apiData={productData} setProductData={setProductData} />
                                 </a>
                         }
                     </div>
@@ -52,3 +55,5 @@ export const Products: React.FC = () => {
         </div>
     )
 }
+
+
