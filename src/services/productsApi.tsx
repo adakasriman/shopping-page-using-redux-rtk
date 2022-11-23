@@ -27,12 +27,14 @@ export const productsApi = createApi({  // created productsApi by using createAp
             query: (searchItem) => `/products/category/${searchItem}`,  //getting data of search item
             providesTags: ['product']  // updating data 
         }),
-        // serchFilter: builder.query<ApiDataObject, any>({
-        //     query: (searchItems: {}) => `/products?limit=${searchItems.limit}&skip=${searchItems.skip}&select=${searchItems.title},${searchItems.price}`,
+        serchFilter: builder.query<ApiDataObject, any>({
+            // query: (searchItems) => `/products?limit=${searchItems.limit}&skip=${searchItems.skip}&select=${searchItems.select}&${searchItems.price}`,
+            query: (searchItems) => `/products?limit=${searchItems.limit}&skip=${searchItems.skip}&select=${searchItems.select}&&price=${searchItems.price}`,
 
-        //     //getting data of search item
-        //     providesTags: ['product']  // updating data 
-        // }),
+
+            //getting data of search item
+            providesTags: ['product']  // updating data 
+        }),
         addProduct: builder.mutation<void /*addContact is used send new record to the server*/, any /* Contact is interface of the new record */>({
             query: (product: any)/*new record*/ => ({ // contact is new record
                 url: '/products/add',
@@ -62,4 +64,4 @@ export const productsApi = createApi({  // created productsApi by using createAp
     })
 })
 
-export const { useProductsQuery, useProductQuery, useCategoriesQuery, useSearchQuery, useCategoryQuery, useAddProductMutation, useEditMutation, useDeleteMutation } = productsApi;
+export const { useProductsQuery, useProductQuery, useCategoriesQuery, useSearchQuery, useCategoryQuery, useAddProductMutation, useEditMutation, useDeleteMutation,useSerchFilterQuery } = productsApi;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useProductsQuery } from '../services/productsApi';
+import { useProductsQuery, useSerchFilterQuery } from '../services/productsApi';
 import { Product, } from './Product';
 import { useNavigate, useLocation, useSearchParams, } from 'react-router-dom';
 import { ApiDataObject } from '../models/product.model';
@@ -9,28 +9,35 @@ import { Paginations } from './Paginations';
 
 export const Products: React.FC = () => {
     const [productData, setProductData] = useState<ApiDataObject>();
-    // pagination
-    const [itemOffset, setItemOffset] = useState(0);
-    // close paginations
-    const { data, error, isLoading, isFetching, isSuccess } = useProductsQuery();
+    const [filtersData, setFiltersData] = useState<ApiDataObject | null>();
+
+
+    let { data, error, isLoading, isFetching, isSuccess } = useProductsQuery();
+    // if (filtersData.limit || filtersData.skip || filtersData.search || filtersData.price) {
+    // }
+    // let [] = useSerchFilterQuery(filtersData);
     useEffect(() => {
         if (data) {
             setProductData(data);
         }
     }, [data])
+    useEffect(() => {
+        console.log(filtersData);
 
+        if (filtersData) {
+            setProductData(filtersData);
+        } else {
+            setProductData(data);
+        }
+    }, [filtersData])
 
     const search = useLocation().search;
 
     const { state } = useLocation();
     const { query } = state || {};
-    // const [searchParams, SetSearchParams] = useSearchParams();
-
-    // const { id } = useParams();
 
     const navigate = useNavigate();
 
-    // SetSearchParams({ q: query });
     const categories = () => {
         navigate(`/products/categories`);
         // navigate(`/filter`);
@@ -38,10 +45,18 @@ export const Products: React.FC = () => {
 
 
 
+    const getFilterData = (filter_data: ApiDataObject | null) => {
+
+        // setProductData(filtersData);
+        setFiltersData(filter_data);
+
+
+    }
+
     return (
         <div>
             <div className="filters">
-                <Filters />
+                <Filters getFilterData={(filtersData: any) => getFilterData(filtersData)} />
             </div>
             <div className="products bg_color-f2f2f2">
                 {/* <button className='filter_button' onClick={() => categories()}>

@@ -35,11 +35,14 @@ export const Search: React.FC = () => {
     }, [data])
 
 
+    const getFilterData = (filtersData: any) => {
+
+    }
 
     return (
         <div>
             <div className="filters">
-                <Filters />
+                <Filters getFilterData={(filtersData: any) => getFilterData(filtersData)} />
             </div>
             <div className='products bg_color-f2f2f2'>
                 {

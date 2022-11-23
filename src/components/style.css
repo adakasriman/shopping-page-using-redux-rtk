@@ -821,16 +821,16 @@
       background: #fff;
       top: 55px;
       z-index: 99;
-      border-bottom: 1px solid #26a541;
-
   }
 
   .filters .container {
-      width: 80%;
+      width: 100%;
       display: flex;
       align-items: center;
       gap: 40px;
       padding: 10px;
+      border-bottom: 1px solid #26a541;
+
   }
 
   /* .filters .container h4 span {

@@ -19,10 +19,15 @@ export const Category: React.FC = () => {
     const navigate = useNavigate();
 
 
+
+    const getFilterData = (filtersData: any) => {
+        console.log(filtersData);
+    }
+
     return (
         <div>
             <div className="filters">
-                <Filters />
+                <Filters getFilterData={(filtersData: any) => getFilterData(filtersData)} />
             </div>
             <div className='products bg_color-f2f2f2'>
                 {

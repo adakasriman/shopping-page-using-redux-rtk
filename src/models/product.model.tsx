@@ -19,7 +19,6 @@ export interface ProductArray {
 
 
 export interface ApiDataObject {
-    indexOf(id: number): unknown
     "products": ProductArray[],
     "total": number,
     "skip": number,
