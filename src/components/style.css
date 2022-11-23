@@ -221,6 +221,8 @@
   }
 
 
+
+
   /* curdOperations */
 
   .post_container {
@@ -285,6 +287,16 @@
       border: none;
   }
 
+  .Catgories_btn {
+      color: #fff;
+      border: none;
+      background: #2a978b;
+      font-size: 15px;
+      /* padding: 5px; */
+      padding: 2px 10px;
+      border-radius: 9px;
+  }
+
   /* /curdOperations */
 
 
@@ -302,11 +314,12 @@
 
 
   /* filter button */
+
   .filter_button {
       position: fixed;
       top: 80px;
       right: 20px;
-      z-index: 1;
+      z-index: 99;
       background: #2a978b;
       padding: 15px 13px 10px 13px;
       border-radius: 50%;
@@ -344,6 +357,7 @@
       border: 1px solid #999;
       overflow: auto;
       display: flex;
+      top: 25%;
   }
 
 
@@ -555,6 +569,7 @@
       position: relative;
       top: -10px;
       right: 10px;
+      z-index: 1;
       font-size: 13px;
       background: #ff6666;
       padding: 2px 4px;
@@ -789,6 +804,7 @@
 
   /* / add product */
 
+  /*filter styles  */
 
   .filter_btoon {
       background: red;
@@ -796,5 +812,41 @@
       /* position: relative; */
   }
 
-  /* side bar styles */
+  .filters {
+      width: 85%;
+      margin: auto;
+      /* padding: 5px; */
+      /* margin-top: 30px; */
+      position: sticky;
+      background: #fff;
+      top: 55px;
+      z-index: 99;
+      border-bottom: 1px solid #26a541;
 
+  }
+
+  .filters .container {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding: 10px;
+  }
+
+  /* .filters .container h4 span {
+      position: relative;
+      top: 40px;
+      left: 40vw;
+      padding: 5px 10px 10px 10px;
+      background: #fff;
+      border: 1px solid #26a541;
+      border-top: 0px;
+  } */
+
+
+
+  .filters .container input {
+      padding: 5px;
+      border-radius: 8px;
+      border: 1px solid #26a541;
+  }

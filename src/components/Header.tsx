@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
         e.preventDefault();
 
         // <Navigate to="/products/search" state={{ search: searchData }} />
-        navigate('/products/search', { state : { query : searchData}})
+        navigate('/products/search', { state: { query: searchData } })
         setSearchData("");
         // navigate(`/products/${SetSearchParams({q : searchData })}`);
     }
@@ -43,6 +43,7 @@ export const Header: React.FC = () => {
 
             <div className='displayFlex_spacebetween gap_15'>
                 <div className='displayFlex_center gap_15'>
+                    <button className='Catgories_btn' onClick={() => navigate(`/products/categories`)}>Catgories</button>
                     <button className='displayFlex_center cart_button'>
                         <div><i className="fa-solid fa-cart-shopping"></i></div>
                         <div className='cartItems'></div>

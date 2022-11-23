@@ -3,6 +3,7 @@ import { useSearchQuery } from '../services/productsApi';
 import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { Product } from './Product';
 import { ApiDataObject } from '../models/product.model';
+import { Filters } from './Filters';
 
 export const Search: React.FC = () => {
     const [productData, setProductData] = useState<ApiDataObject>();
@@ -36,18 +37,23 @@ export const Search: React.FC = () => {
 
 
     return (
-        <div className='products bg_color-f2f2f2'>
-            {
-                productData?.products.length ? data?.products.map(product => {
-                    return <div key={product.id} className='product'>
-                        <Product singleProduct={product} apiData={productData} setProductData={setProductData} />
+        <div>
+            <div className="filters">
+                <Filters />
+            </div>
+            <div className='products bg_color-f2f2f2'>
+                {
+                    productData?.products.length ? data?.products.map(product => {
+                        return <div key={product.id} className='product'>
+                            <Product singleProduct={product} apiData={productData} setProductData={setProductData} />
+                        </div>
+                    }) : <div>
+                        <h3 className='no_data'>No Data</h3>
                     </div>
-                }) : <div>
-                    <h3 className='no_data'>No Data</h3>
-                </div>
-            }
+                }
 
 
+            </div>
         </div>
     )
 }

@@ -11,12 +11,12 @@ import { Search } from './components/Search';
 import { Category } from './components/Category';
 import { AddProduct } from './components/AddProduct';
 import { Filters } from './components/Filters';
-// import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function App() {
-  // const { name } = useParams();
+  const { name } = useParams();
   // const navigate = useNavigate();
-  // console.log("name", name);
+  console.log("name", name);
 
   // if (!name) {
   //   navigate("/products");
@@ -26,11 +26,7 @@ function App() {
       <header className='header'>
         <Header />
       </header>
-      <div className="filter">
-        <Filters />
-      </div>
       <section className='p_10'>
-
         <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/products" element={<Products />} />

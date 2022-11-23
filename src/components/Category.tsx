@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ApiDataObject } from '../models/product.model';
 import { useCategoryQuery } from '../services/productsApi';
+import { Filters } from './Filters';
 import { Product } from './Product';
 
 export const Category: React.FC = () => {
@@ -19,14 +20,19 @@ export const Category: React.FC = () => {
 
 
     return (
-        <div className='products bg_color-f2f2f2'>
-            {
-                productData?.products.map(product => {
-                    return <div key={product.id} className='product'>
-                        <Product singleProduct={product} apiData={productData} setProductData={setProductData} />
-                    </div>
-                })
-            }
+        <div>
+            <div className="filters">
+                <Filters />
+            </div>
+            <div className='products bg_color-f2f2f2'>
+                {
+                    productData?.products.map(product => {
+                        return <div key={product.id} className='product'>
+                            <Product singleProduct={product} apiData={productData} setProductData={setProductData} />
+                        </div>
+                    })
+                }
+            </div>
         </div>
     )
 }
