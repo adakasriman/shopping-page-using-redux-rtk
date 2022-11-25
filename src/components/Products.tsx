@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useProductsQuery, useSerchFilterQuery } from '../services/productsApi';
 import { Product, } from './Product';
 import { useNavigate, useLocation, useSearchParams, } from 'react-router-dom';
-import { ApiDataObject } from '../models/product.model';
+import { ApiDataObject, ProductArray } from '../models/product.model';
 import { Filters } from './Filters';
 import { Paginations } from './Paginations';
 
@@ -10,6 +10,10 @@ import { Paginations } from './Paginations';
 export const Products: React.FC = () => {
     const [productData, setProductData] = useState<ApiDataObject>();
     const [filtersData, setFiltersData] = useState<ApiDataObject | null>();
+
+    const [perPageData, setPerPageData] = useState<ProductArray[]>()
+
+    const [PerPage, setPerPage] = useState<number>(1);
 
 
     let { data, error, isLoading, isFetching, isSuccess } = useProductsQuery();
@@ -19,8 +23,12 @@ export const Products: React.FC = () => {
     useEffect(() => {
         if (data) {
             setProductData(data);
+            setPerPageData(data?.products?.slice(PerPage * 8 - 8, PerPage * 8));
         }
-    }, [data])
+
+        console.log(perPageData);
+
+    }, [data, PerPage])
     useEffect(() => {
         console.log(filtersData);
 
@@ -31,10 +39,10 @@ export const Products: React.FC = () => {
         }
     }, [filtersData])
 
-    const search = useLocation().search;
+    // const search = useLocation().search;
 
-    const { state } = useLocation();
-    const { query } = state || {};
+    // const { state } = useLocation();
+    // const { query } = state || {};
 
     const navigate = useNavigate();
 
@@ -53,6 +61,9 @@ export const Products: React.FC = () => {
 
     }
 
+    console.log(productData?.products);
+
+
     return (
         <div>
             <div className="filters">
@@ -62,12 +73,11 @@ export const Products: React.FC = () => {
                 {/* <button className='filter_button' onClick={() => categories()}>
                     <i className="fa-solid fa-filter"></i>
                 </button> */}
-                {
-                    productData?.products.map((product) => {
+                {perPageData &&
+                    perPageData?.map((product: ProductArray) => {
                         return <div key={product.id} className='product'>
                             {
                                 product?.isDeleted ?
-
                                     <></> : <a>
                                         <Product singleProduct={product} apiData={productData} setProductData={setProductData} />
                                     </a>
@@ -77,8 +87,8 @@ export const Products: React.FC = () => {
 
                 }
 
-                <div>
-                    <Paginations itemsPerPage={productData?.limit} />
+                <div className='pagination'>
+                    <Paginations products={productData?.products} setPerPage={setPerPage} PerPage = {PerPage} />
                 </div>
             </div>
         </div>

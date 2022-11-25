@@ -1,36 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate';
+import { ProductArray } from '../models/product.model';
 
 type Props = {
-    itemsPerPage: any
+    products: ProductArray[] | undefined,
+    setPerPage: React.Dispatch<React.SetStateAction<number>>,
+    PerPage : number
 }
 
-export const Paginations: React.FC<Props> = ({ itemsPerPage }) => {
-    // Here we use item offsets; we could also use page offsets
-    // following the API or data you're working with.
-    const [itemOffset, setItemOffset] = useState(0);
+export const Paginations: React.FC<Props> = ({ products, setPerPage, PerPage}) => {
+    const [productsLength, setProductsLength] = useState<any>(products);
+    const [pageNumber, setPageNumber] = useState<number[]>();
+    // let pageNumber = [];
+    // const pageNumber = [10, 20, 30];
 
-    // Simulate fetching items from another resources.
-    // (This could be items from props; or items loaded in a local state
-    // from an API endpoint with useEffect and useState)
-    const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-    const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    const currentItems = items.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(items.length / itemsPerPage);
+    const prev = "<<";
+    const next = ">>"
 
-    // Invoke when user click to request another page.
-    const handlePageClick = (event: { selected: number; }) => {
-        const newOffset = (event.selected * itemsPerPage) % items.length;
-        console.log(
-            `User requested page number ${event.selected}, which is offset ${newOffset}`
-        );
-        setItemOffset(newOffset);
-    };
+    useEffect(() => {
+        if (products?.length) {
+            setProductsLength(products?.length);
+        }
+    }, [products])
+    console.log("pageNumber",PerPage);
+    
+
+    useEffect(() => {
+
+
+        let arr = []
+        if (productsLength) {
+            for (let index = 1; index < Math.ceil(productsLength / 8) + 1; index++) {
+                arr.push(index);
+            }
+            setPageNumber(arr);
+        }
+
+    }, [productsLength])
+
+
+
 
     return (
-        <>
-            <ReactPaginate
+        <div>
+            {/* <ReactPaginate
                 breakLabel="..."
                 nextLabel="next >"
                 onPageChange={(e:any)=> handlePageClick(e)}
@@ -38,7 +51,17 @@ export const Paginations: React.FC<Props> = ({ itemsPerPage }) => {
                 pageCount={pageCount}
                 previousLabel="< previous"
                 // renderOnZeroPageCount={null}
-            />
-        </>
+            /> */}
+
+            <div className='page_btns'>
+                <button onClick={() => setPerPage(PerPage - 1)} disabled={PerPage == 1}> {prev}Prev </button>
+                {
+                    pageNumber &&
+                    pageNumber?.map((page: any, index) => <div className={page == PerPage ? 'active-page' : "page_btn"} key={index} onClick={() => setPerPage(page)}>{page}</div>)
+                }
+                <button onClick={() => setPerPage(PerPage + 1)} disabled={pageNumber?.length == PerPage}>Next{next}</button>
+
+            </div>
+        </div>
     );
 }

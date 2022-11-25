@@ -850,3 +850,41 @@
       border-radius: 8px;
       border: 1px solid #26a541;
   }
+
+
+  /* paginations */
+
+  .pagination {
+      width: 100%;
+      /* position: fixed;
+      bottom: 0; */
+      padding: 10px;
+      background: #fff;
+      z-index: 1;
+  }
+
+  .page_btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+  }
+
+  .page_btn {
+      padding: 5px 10px;
+      border: 1px solid #26a541;
+  }
+
+
+
+  .page_btns button {
+      background: none;
+      /* color: #26a541; */
+  }
+
+  .page_btns .active-page {
+    padding: 5px 10px;
+    background: #26a541;
+    border: 1px solid #26a541;
+    color: #fff;
+}
