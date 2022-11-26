@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSerchFilterQuery } from '../services/productsApi';
 import { useSearchParams, } from 'react-router-dom';
+import { ApiDataObject } from '../models/product.model';
 
 
 
 type Props = {
+    // getFilterData: ApiDataObject
     getFilterData: any
+
 }
 
 type FormData = {
@@ -29,12 +32,12 @@ export const Filters: React.FC<Props> = ({ getFilterData }) => {
     const { data, error, isLoading, isFetching, isSuccess } = useSerchFilterQuery(formData);
 
     useEffect(() => {
-        
+
         if (formData.limit == "" || 0) {
-            
+
             getFilterData(null);
         } else if (formData.limit) {
-            
+
             getFilterData(data);
         }
     }, [data])
@@ -56,10 +59,7 @@ export const Filters: React.FC<Props> = ({ getFilterData }) => {
         setFormData({ ...formData, [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value }); //here assiging the value to name attribute
     }
 
-    const filterHandular = (e: React.FormEvent) => {
-        e.preventDefault();
 
-    }
 
     const filterToggle = () => {
         setShowAndhide(!showAndhide);
@@ -70,10 +70,10 @@ export const Filters: React.FC<Props> = ({ getFilterData }) => {
                 select: "",
                 price: 0,
             })
-        }else{
+        } else {
             getFilterData(null);
         }
-       
+
     }
 
 
@@ -83,7 +83,7 @@ export const Filters: React.FC<Props> = ({ getFilterData }) => {
             {
                 showAndhide && <div className='container pt_0'>
                     <h4 className=""><span>Filters</span></h4>
-                    <form action="" onSubmit={(e) => filterHandular(e)} className="displayFlex_center gap_20">
+                    <form action="" className="displayFlex_center gap_20">
                         <div className="item displayFlex_center gap_5">
                             <div>Limit:</div>
                             <input type="number" value={formData.limit} onChange={chaneEvent} name="limit" placeholder='limit' />

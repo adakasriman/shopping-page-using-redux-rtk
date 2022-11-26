@@ -2,7 +2,7 @@ import React from "react";
 
 
 interface Props {
-    content: any,
+    content: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
     handleClose: any
 }
 

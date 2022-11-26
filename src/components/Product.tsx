@@ -9,7 +9,7 @@ import { Popup } from './Popup';
 interface Props {
     singleProduct: ProductArray,
     setProductData: React.Dispatch<React.SetStateAction<ApiDataObject | undefined>>,
-    apiData: any,
+    apiData: ApiDataObject,
 }
 
 

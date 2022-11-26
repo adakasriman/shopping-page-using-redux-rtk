@@ -738,11 +738,6 @@
 
   /* / product view */
 
-  .image_slider {
-      /* width: 100%;
-      height: 40%; */
-  }
-
   .your-app .rsis-container {
       width: 23vw;
   }
@@ -955,9 +950,6 @@
           padding: 5px 10px 10px 10px;
       }
 
-      .filters .container input {
-          /* width: 82px; */
-      }
   }
 
   @media (max-width: 768px) {

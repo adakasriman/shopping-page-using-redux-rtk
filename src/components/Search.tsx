@@ -7,7 +7,7 @@ import { ApiDataObject, ProductArray } from '../models/product.model';
 
 export const Search: React.FC = () => {
     const [productData, setProductData] = useState<ApiDataObject>();
-    const [searchItem, setSearchitem] = useState<any>()
+    const [searchItem, setSearchitem] = useState<string | number | any>()
     const [searchParams, SetSearchParams] = useSearchParams();
     const { data, isLoading } = useSearchQuery(searchItem);
 

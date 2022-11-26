@@ -9,7 +9,8 @@ type Props = {
 }
 
 export const Paginations: React.FC<Props> = ({ products, setPerPage, PerPage}) => {
-    const [productsLength, setProductsLength] = useState<any>(products);
+    // const [productsLength, setProductsLength] = useState<ProductArray[]>(products); 
+    const [productsLength, setProductsLength] = useState<any>(products); 
     const [pageNumber, setPageNumber] = useState<number[]>();
 
     const prev = "<<";
