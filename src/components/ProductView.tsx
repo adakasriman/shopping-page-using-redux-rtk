@@ -62,10 +62,10 @@ export const ProductView: React.FC = () => {
                                 </div>
 
                             </div>
-                            <div className='cartAndAdd_btn'>
-                                <button>Add To Cart</button>
-                                <button>Buy Now</button>
-                            </div>
+                            {/* <div className='cartAndAdd_btn'>
+                                <button  disabled>Add To Cart</button>
+                                <button disabled>Buy Now</button>
+                            </div> */}
                             <div className='cartAndAdd_btn'>
                                 <button onClick={() => backToProducts()}>Back to Products</button>
                             </div>
