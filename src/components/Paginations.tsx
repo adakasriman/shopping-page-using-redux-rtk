@@ -11,8 +11,6 @@ type Props = {
 export const Paginations: React.FC<Props> = ({ products, setPerPage, PerPage}) => {
     const [productsLength, setProductsLength] = useState<any>(products);
     const [pageNumber, setPageNumber] = useState<number[]>();
-    // let pageNumber = [];
-    // const pageNumber = [10, 20, 30];
 
     const prev = "<<";
     const next = ">>"
@@ -22,7 +20,6 @@ export const Paginations: React.FC<Props> = ({ products, setPerPage, PerPage}) =
             setProductsLength(products?.length);
         }
     }, [products])
-    console.log("pageNumber",PerPage);
     
 
     useEffect(() => {
@@ -43,16 +40,6 @@ export const Paginations: React.FC<Props> = ({ products, setPerPage, PerPage}) =
 
     return (
         <div>
-            {/* <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
-                onPageChange={(e:any)=> handlePageClick(e)}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel="< previous"
-                // renderOnZeroPageCount={null}
-            /> */}
-
             <div className='page_btns'>
                 <button onClick={() => setPerPage(PerPage - 1)} disabled={PerPage == 1}> {prev}Prev </button>
                 {

@@ -29,13 +29,12 @@ export const Filters: React.FC<Props> = ({ getFilterData }) => {
     const { data, error, isLoading, isFetching, isSuccess } = useSerchFilterQuery(formData);
 
     useEffect(() => {
-        console.log(data);
         
         if (formData.limit == "" || 0) {
-            debugger
+            
             getFilterData(null);
         } else if (formData.limit) {
-            debugger
+            
             getFilterData(data);
         }
     }, [data])
@@ -83,7 +82,7 @@ export const Filters: React.FC<Props> = ({ getFilterData }) => {
     return (
         <div>
             {
-                showAndhide && <div className='container'>
+                showAndhide && <div className='container pt_0'>
                     <h4 className=""><span>Filters</span></h4>
                     <form action="" onSubmit={(e) => filterHandular(e)} className="displayFlex_center gap_20">
                         <div className="item displayFlex_center gap_5">

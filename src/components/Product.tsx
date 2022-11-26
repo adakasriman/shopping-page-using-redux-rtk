@@ -37,6 +37,8 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
 
     // close
     useEffect(() => {
+
+        
         apiData = JSON.parse(JSON.stringify(apiData));
         if (response?.data?.isDeleted == true) {
             const index = apiData.products.findIndex((item: any) => item.id == response?.data?.id);
@@ -46,7 +48,6 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
             setProductData(apiData);
         }
 
-
     }, [response?.data])
 
     useEffect(() => {
@@ -54,12 +55,12 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
         if (updateResponse?.data?.id) {
             const index = apiData.products.findIndex((item: any) => item.id == updateResponse?.data?.id);
             if (index > -1) { // only splice array when item is found
-                apiData.products.splice(index, 1,updateResponse?.data); // 2nd parameter means remove one item only
+                apiData.products.splice(index, 1, updateResponse?.data); // 2nd parameter means remove one item only
             }
             setProductData(apiData);
 
         }
-        
+
     }, [updateResponse?.data])
 
     const viewProduct = (id: number) => {

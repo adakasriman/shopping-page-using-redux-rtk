@@ -35,13 +35,14 @@ export const productsApi = createApi({  // created productsApi by using createAp
             //getting data of search item
             providesTags: ['product']  // updating data 
         }),
-        addProduct: builder.mutation<void /*addContact is used send new record to the server*/, any /* Contact is interface of the new record */>({
-            query: (product: any)/*new record*/ => ({ // contact is new record
+        addProduct: builder.mutation<any , any >({
+            query: (product)/*new record*/ => ({ // contact is new record
                 url: '/products/add',
                 method: "POST",
+                headers: { 'Content-Type': 'application/json' },
                 body: product
             }),
-            invalidatesTags: ['product'] // updating data 
+            // invalidatesTags: ['product'] // updating data 
         }),
         edit: builder.mutation<ProductArray, any>({
             query: (product: any)/*new record*/ => ({ // contact is new record

@@ -15,7 +15,6 @@ export const Category: React.FC = () => {
         }
 
     }, [data])
-    console.log(data);
     const navigate = useNavigate();
 
 

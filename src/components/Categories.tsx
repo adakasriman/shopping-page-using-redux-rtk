@@ -6,7 +6,6 @@ import { useNavigate} from 'react-router-dom';
 
 export const Categories: React.FC = () => {
     const { data, error, isLoading, isFetching, isSuccess } = useCategoriesQuery();
-    console.log(data);
 
     const navigate = useNavigate();
 

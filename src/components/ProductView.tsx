@@ -6,8 +6,6 @@ import { useProductQuery } from '../services/productsApi';
 export const ProductView: React.FC = () => {
     const { id } = useParams<string>();
     const { data } = useProductQuery(id);
-    // debugger
-    console.log(data)
 
     const navigate = useNavigate();
 
