@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useProductsQuery, useSerchFilterQuery } from '../services/productsApi';
+import { useProductsQuery } from '../services/productsApi';
 import { Product, } from './Product';
-import { useNavigate, useLocation, useSearchParams, } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ApiDataObject, ProductArray } from '../models/product.model';
 import { Filters } from './Filters';
 import { Paginations } from './Paginations';
@@ -17,7 +17,7 @@ export const Products: React.FC = () => {
     const [PerPage, setPerPage] = useState<number>(1);
     const navigate = useNavigate();
 
-    let { data, error, isLoading, isFetching, isSuccess } = useProductsQuery();
+    let { data,isLoading } = useProductsQuery();
 
     useEffect(() => {
 
@@ -44,9 +44,6 @@ export const Products: React.FC = () => {
         if (productData?.products) {
             setPerPageData(productData?.products?.slice(PerPage * 8 - 8, PerPage * 8));
         }
-
-
-
     }, [PerPage, data, filtersData, productData]);
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSerchFilterQuery } from '../services/productsApi';
-import { useNavigate, useLocation, useSearchParams, } from 'react-router-dom';
+import { useSearchParams, } from 'react-router-dom';
 
 
 
@@ -58,7 +58,6 @@ export const Filters: React.FC<Props> = ({ getFilterData }) => {
 
     const filterHandular = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(formData);
 
     }
 

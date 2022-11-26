@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchQuery } from '../services/productsApi';
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Product } from './Product';
 import { ApiDataObject, ProductArray } from '../models/product.model';
-import { Filters } from './Filters';
+// import { Filters } from './Filters';
 
 export const Search: React.FC = () => {
     const [productData, setProductData] = useState<ApiDataObject>();

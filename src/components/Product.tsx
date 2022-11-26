@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ApiDataObject, ProductArray } from '../models/product.model';
 import { useDeleteMutation, useEditMutation } from '../services/productsApi';
-import { useParams, useNavigate, useLocation, useSearchParams, } from 'react-router-dom';
-import { AddProduct } from './AddProduct';
+import { useNavigate} from 'react-router-dom';
 
 import { Popup } from './Popup';
 

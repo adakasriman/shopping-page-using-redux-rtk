@@ -10,17 +10,9 @@ import { ProductView } from './components/ProductView';
 import { Search } from './components/Search';
 import { Category } from './components/Category';
 import { AddProduct } from './components/AddProduct';
-import { Filters } from './components/Filters';
-import { useParams, useNavigate } from 'react-router-dom';
 
 function App() {
-  const { name } = useParams();
-  // const navigate = useNavigate();
-  console.log("name", name);
 
-  // if (!name) {
-  //   navigate("/products");
-  // }
   return (
     <div className="App">
       <header className='header'>

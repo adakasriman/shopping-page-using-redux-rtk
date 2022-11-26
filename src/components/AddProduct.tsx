@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 export const AddProduct: React.FC = () => {
-    const { register, handleSubmit, setValue, reset } = useForm(); // form hook
+    const { register, handleSubmit } = useForm(); // form hook
 
     const [addProduct, response] = useAddProductMutation();
     const navigate = useNavigate();
