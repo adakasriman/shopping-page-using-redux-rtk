@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useAddProductMutation } from '../services/productsApi';
 import { useNavigate } from 'react-router-dom'
+import { Button } from './Button';
 
 
 export const AddProduct: React.FC = () => {
@@ -68,7 +69,8 @@ export const AddProduct: React.FC = () => {
                     </div>
                 </div>
                 <div className='add_button'>
-                    <button type="submit">Add product</button>
+                    {/* <button type="submit">Add product</button> */}
+                    <Button type="submit" title='Add product'/>
                 </div>
             </form>
         </div>

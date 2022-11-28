@@ -2,6 +2,7 @@ import React from 'react';
 import SimpleImageSlider from "react-simple-image-slider";
 import { useNavigate, useParams } from 'react-router-dom'
 import { useProductQuery } from '../services/productsApi';
+import { Button } from './Button';
 
 export const ProductView: React.FC = () => {
     const { id } = useParams<string>();
@@ -67,7 +68,8 @@ export const ProductView: React.FC = () => {
                                 <button disabled>Buy Now</button>
                             </div> */}
                             <div className='cartAndAdd_btn'>
-                                <button onClick={() => backToProducts()}>Back to Products</button>
+                                {/* <button onClick={() => backToProducts()}>Back to Products</button> */}
+                                <Button type='button' title="Back to Products" backToProducts={() => backToProducts()}  />
                             </div>
                         </div>
                     </div>

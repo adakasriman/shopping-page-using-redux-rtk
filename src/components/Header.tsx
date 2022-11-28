@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 import { useNavigate } from 'react-router-dom'
+import { Button } from './Button'
 
 export const Header: React.FC = () => {
     const [searchData, setSearchData] = useState<string>("")
@@ -23,6 +24,10 @@ export const Header: React.FC = () => {
         navigate(`/products`);
     }
 
+    const navigateAddProduct = () => {
+        navigate(`/products/add`)
+    }
+
     return (
         <div>
             <div className='displayFlex_center dupicate-head' style={{ gap: "10px" }}>
@@ -38,9 +43,10 @@ export const Header: React.FC = () => {
                     <div className='search_btn'>
                         <input type="text" value={searchData} onChange={(e) => setSearchData(e.target.value)} name="" id="" placeholder='search product' />
                         <span>
-                            <button type='submit'>
+                            {/* <button type='submit'>
                                 <i className="fa-solid fa-magnifying-glass"></i>
-                            </button>
+                            </button> */}
+                            <Button type="submit" title='' iTagClassName='fa-solid fa-magnifying-glass'/>
                         </span>
                     </div>
                 </form>
@@ -52,7 +58,8 @@ export const Header: React.FC = () => {
                         <div><i className="fa-solid fa-cart-shopping"></i></div>
                         <div className='cartItems'></div>
                     </button> */}
-                        <button className='addProduct' onClick={() => navigate(`/products/add`)}>Add <i className="fa-brands fa-product-hunt"></i></button>
+                        <Button type="button" title='Add' className='addProduct' iTagClassName="fa-brands fa-product-hunt" navigateAddProduct={() => navigateAddProduct()} />
+                        {/* <button className='addProduct' onClick={() => navigate(`/products/add`)}>Add <i className="fa-brands fa-product-hunt"></i></button> */}
                     </div>
 
                 </div>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { ApiDataObject, ProductArray } from '../models/product.model';
 import { useDeleteMutation, useEditMutation } from '../services/productsApi';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Popup } from './Popup';
+import { Button } from './Button';
 
 
 interface Props {
@@ -37,7 +38,7 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
     // close
     useEffect(() => {
 
-        
+
         apiData = JSON.parse(JSON.stringify(apiData));
         if (response?.data?.isDeleted == true) {
             const index = apiData.products.findIndex((item: any) => item.id == response?.data?.id);
@@ -91,6 +92,11 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
         // await addProduct(product);
     };
 
+    const deleteproductHanculer = (id: number) => {
+        deletePost(id);
+    }
+
+
 
     // close: edit page
 
@@ -118,8 +124,14 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
                 </div>
             </div >
             <div className='displayFlex_spacebetween gap_15 mt_10'>
-                <div className="delete cursor-pointer" onClick={() => deletePost(singleProduct?.id)}> Delete</div>
-                <div className="edit cursor-pointer" onClick={() => editProduct(singleProduct?.id, singleProduct)}>Edit</div>
+
+                <Button type="button" title='Delete' className='delete' deleteproductHanculer={() => deleteproductHanculer(singleProduct?.id)} />
+
+                {/* <div className="delete cursor-pointer" onClick={() => deletePost(singleProduct?.id)}> Delete</div> */}
+                {/* <div className="edit cursor-pointer" onClick={() => editProduct(singleProduct?.id, singleProduct)}>Edit</div> */}
+
+                <Button type="button" title='Edit' className='edit' editProduct={() => editProduct(singleProduct?.id, singleProduct)} />
+
             </div>
             {
                 isOpen && <Popup content={
@@ -157,7 +169,9 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
                                     <textarea {...register("productDetails.description")} name="description" />
                                 </div> */}
 
-                                <button type='submit'>Update</button>
+                                {/* <button type='submit'>Update</button> */}
+                                <Button type="submit" title='Update' />
+
 
                             </form>
                         </div>

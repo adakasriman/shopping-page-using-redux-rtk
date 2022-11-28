@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSerchFilterQuery } from '../services/productsApi';
 import { useSearchParams, } from 'react-router-dom';
 import { ApiDataObject } from '../models/product.model';
+import { Button } from './Button';
 
 
 
@@ -104,9 +105,11 @@ export const Filters: React.FC<Props> = ({ getFilterData }) => {
                 </div>
             }
 
-            <button className='filter_button' onClick={() => filterToggle()}>
+            {/* <button className='filter_button' onClick={() => filterToggle()}>
                 <i className="fa-solid fa-filter"></i>
-            </button>
+            </button> */}
+            <Button type="button" title='' className='filter_button' iTagClassName="fa-solid fa-filter" filterToggle={() => filterToggle()} />
+
         </div>
     )
 }

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate';
 import { ProductArray } from '../models/product.model';
+import { Button } from './Button';
 
 type Props = {
     products: ProductArray[] | undefined,
     setPerPage: React.Dispatch<React.SetStateAction<number>>,
-    PerPage : number
+    PerPage: number
 }
 
-export const Paginations: React.FC<Props> = ({ products, setPerPage, PerPage}) => {
+export const Paginations: React.FC<Props> = ({ products, setPerPage, PerPage }) => {
     // const [productsLength, setProductsLength] = useState<ProductArray[]>(products); 
-    const [productsLength, setProductsLength] = useState<any>(products); 
+    const [productsLength, setProductsLength] = useState<any>(products);
     const [pageNumber, setPageNumber] = useState<number[]>();
 
     const prev = "<<";
@@ -21,7 +22,7 @@ export const Paginations: React.FC<Props> = ({ products, setPerPage, PerPage}) =
             setProductsLength(products?.length);
         }
     }, [products])
-    
+
 
     useEffect(() => {
 
@@ -37,17 +38,28 @@ export const Paginations: React.FC<Props> = ({ products, setPerPage, PerPage}) =
     }, [productsLength])
 
 
+    const pageback = () => {
+        setPerPage(PerPage - 1);
+    }
+
+    const pageForward = () => {
+        setPerPage(PerPage + 1);
+    }
 
 
     return (
         <div>
             <div className='page_btns'>
-                <button onClick={() => setPerPage(PerPage - 1)} disabled={PerPage == 1}> {prev}Prev </button>
+
+                {/* <button onClick={() => setPerPage(PerPage - 1)} disabled={PerPage == 1}> {prev}Prev </button> */}
+                <Button type="button" title='<<Prev' pageback={() => pageback()} disabled={PerPage == 1} />
+
                 {
                     pageNumber &&
                     pageNumber?.map((page: any, index) => <div className={page == PerPage ? 'active-page' : "page_btn"} key={index} onClick={() => setPerPage(page)}>{page}</div>)
                 }
-                <button onClick={() => setPerPage(PerPage + 1)} disabled={pageNumber?.length == PerPage}>Next{next}</button>
+                {/* <button onClick={() => setPerPage(PerPage + 1)} disabled={pageNumber?.length == PerPage}>Next{next}</button> */}
+                <Button type="button" title='Next>>' pageForward={() => pageForward()} disabled={pageNumber?.length == PerPage} />
 
             </div>
         </div>
