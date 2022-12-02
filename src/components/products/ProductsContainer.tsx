@@ -3,8 +3,8 @@ import { useDeleteMutation, useEditMutation, useProductsQuery } from '../../serv
 import { Product, } from './Product';
 import { useNavigate } from 'react-router-dom';
 import { ApiDataObject, ProductArray } from '../../models/product.model';
-import { Filters } from '../Filters';
-import { Paginations } from '../Paginations';
+import { Filters } from '../filters/Filters';
+import { Paginations } from '../pagination/Paginations';
 
 
 export const Products: React.FC = () => {
@@ -23,10 +23,8 @@ export const Products: React.FC = () => {
 
     //update product
     const [updateItem, setUpdateItem] = useState<string>();
-    const [storeUpdateProduct, setStoreUpdateProduct] = useState<any>();
 
     const navigate = useNavigate();
-
 
     // API's fatching
 
@@ -102,38 +100,39 @@ export const Products: React.FC = () => {
 
     //--->Delete Product 
 
-    // useEffect(() => {
-    //     apiData = JSON.parse(JSON.stringify(apiData));
-    //     if (response?.data?.isDeleted == true) {
-    //         const index = apiData.products.findIndex((item: any) => item.id == response?.data?.id);
-    //         if (index > -1) { // only splice array when item is found
-    //             apiData.products.splice(index, 1); // 2nd parameter means remove one item only
-    //         }
-    //         setProductData(apiData);
-    //     }
+    useEffect(() => {
+        if (productData) {
+            let apiData = JSON.parse(JSON.stringify(productData));
+            if (response?.data?.isDeleted == true) {
+                const index = apiData.products.findIndex((item: any) => item.id == response?.data?.id);
+                if (index > -1) { // only splice array when item is found
+                    apiData.products.splice(index, 1); // 2nd parameter means remove one item only
+                }
+                setProductData(apiData);
+            }
+        }
 
-    // }, [response?.data])
-
-    // const deleteproductHanculer = (id: number) => {
-    //     deletePost(id);
-    // }
+    }, [response?.data])
 
     //---> close: Delete Product
 
     //--->Update Product 
 
-    // useEffect(() => {
-    //     apiData = JSON.parse(JSON.stringify(apiData));
-    //     if (updateResponse?.data?.id) {
-    //         const index = apiData.products.findIndex((item: any) => item.id == updateResponse?.data?.id);
-    //         if (index > -1) { // only splice array when item is found
-    //             apiData.products.splice(index, 1, updateResponse?.data); // 2nd parameter means remove one item only
-    //         }
-    //         setProductData(apiData);
+    useEffect(() => {
+        if (productData) {
+            debugger
+            let apiData = JSON.parse(JSON.stringify(productData));
+            if (updateResponse?.data?.id) {
+                const index = apiData.products.findIndex((item: any) => item.id == updateResponse?.data?.id);
+                if (index > -1) { // only splice array when item is found
+                    apiData.products.splice(index, 1, updateResponse?.data); // 2nd parameter means remove one item only
+                }
+                setProductData(apiData);
 
-    //     }
+            }
+        }
 
-    // }, [updateResponse?.data])
+    }, [updateResponse?.data])
 
     //---> close: Update Product
 
@@ -164,7 +163,7 @@ export const Products: React.FC = () => {
                                     {
                                         product?.isDeleted ?
                                             <></> : <a>
-                                                <Product singleProduct={product} apiData={productData} setProductData={setProductData} />
+                                                <Product singleProduct={product} apiData={productData} setProductData={setProductData} deletePost={deletePost} updateProduct={updateProduct} />
                                             </a>
                                     }
                                 </div>

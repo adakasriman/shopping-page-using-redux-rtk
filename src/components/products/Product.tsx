@@ -3,58 +3,30 @@ import { ApiDataObject, ProductArray } from '../../models/product.model';
 import { useDeleteMutation, useEditMutation } from '../../services/productsApi';
 import { useNavigate } from 'react-router-dom';
 
-import { Popup } from '../Popup';
-import { Button } from '../Button';
+import { Popup } from '../popup-component/Popup';
+import { Button } from '../button/Button';
+import { MutationTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, MutationDefinition } from '@reduxjs/toolkit/dist/query';
 
 
 interface Props {
     singleProduct: ProductArray,
     setProductData: React.Dispatch<React.SetStateAction<ApiDataObject | undefined>>,
     apiData: ApiDataObject,
-}
+    deletePost:MutationTrigger<MutationDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, "product", ProductArray, "productsApi">>,
+    updateProduct:MutationTrigger<MutationDefinition<any, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, "product", ProductArray, "productsApi">>
 
+}
 
 // close:  edit type
 
-export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiData }) => {
+export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiData, deletePost,updateProduct }) => {
     const navigate = useNavigate();
-    const [deletePost, response] = useDeleteMutation();
-    const [updateProduct, updateResponse] = useEditMutation();
 
     // edit 
     const [updateItem, setUpdateItem] = useState<string>();
     const [product, setProduct] = useState<any>();
     const [isOpen, setIsOpen] = useState<boolean>(false);
-
-
-    // close
-    useEffect(() => {
-        apiData = JSON.parse(JSON.stringify(apiData));
-        if (response?.data?.isDeleted == true) {
-            const index = apiData.products.findIndex((item: any) => item.id == response?.data?.id);
-            if (index > -1) { // only splice array when item is found
-                apiData.products.splice(index, 1); // 2nd parameter means remove one item only
-            }
-            setProductData(apiData);
-        }
-
-    }, [response?.data])
-
-    useEffect(() => {
-        apiData = JSON.parse(JSON.stringify(apiData));
-        if (updateResponse?.data?.id) {
-            const index = apiData.products.findIndex((item: any) => item.id == updateResponse?.data?.id);
-            if (index > -1) { // only splice array when item is found
-                apiData.products.splice(index, 1, updateResponse?.data); // 2nd parameter means remove one item only
-            }
-            setProductData(apiData);
-
-        }
-
-    }, [updateResponse?.data])
-
-    // edit page
-
 
     function editProduct(id: number, product: ProductArray) {
         let editData = {
@@ -71,25 +43,15 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
             id: product?.id,
             title: updateItem
         };
-
         updateProduct(editProduct);
         setIsOpen(!isOpen);
-
         // await addProduct(product);
     };
 
 
-    const deleteproductHanculer = (id: number) => {
-        deletePost(id);
-    }
-
     const viewProduct = (id: number) => {
         navigate(`/products/product/${id}`);
     }
-
-
-
-    // close: edit page
 
     return (
         <div>
@@ -116,12 +78,12 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
             </div >
             <div className='displayFlex_spacebetween gap_15 mt_10'>
 
-                <Button type="button" title='Delete' className='delete' deleteproductHanculer={() => deleteproductHanculer(singleProduct?.id)} />
+                {/* <Button type="button" title='Delete' className='delete' deleteproductHanculer={() => deleteproductHanculer(singleProduct?.id)} /> */}
 
-                {/* <div className="delete cursor-pointer" onClick={() => deletePost(singleProduct?.id)}> Delete</div> */}
-                {/* <div className="edit cursor-pointer" onClick={() => editProduct(singleProduct?.id, singleProduct)}>Edit</div> */}
+                <div className="delete cursor-pointer" onClick={() => deletePost(singleProduct?.id)}> Delete</div>
+                <div className="edit cursor-pointer" onClick={() => editProduct(singleProduct?.id, singleProduct)}>Edit</div>
 
-                <Button type="button" title='Edit' className='edit' editProduct={() => editProduct(singleProduct?.id, singleProduct)} />
+                {/* <Button type="button" title='Edit' className='edit' editProduct={() => editProduct(singleProduct?.id, singleProduct)} /> */}
 
             </div>
             {

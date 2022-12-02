@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCategoriesQuery } from '../services/productsApi';
+import { useCategoriesQuery } from '../../../services/productsApi';
 
 import { useNavigate } from 'react-router-dom';
 

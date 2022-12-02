@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { useAddProductMutation } from '../services/productsApi';
+import { useAddProductMutation } from '../../services/productsApi';
 import { useNavigate } from 'react-router-dom'
-import { Button } from './Button';
+import { Button } from '../button/Button';
 
 
 export const AddProduct: React.FC = () => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useSerchFilterQuery } from '../services/productsApi';
+import { useSerchFilterQuery } from '../../services/productsApi';
 import { useSearchParams, } from 'react-router-dom';
-import { ApiDataObject } from '../models/product.model';
-import { Button } from './Button';
+import { ApiDataObject } from '../../models/product.model';
+import { Button } from '../button/Button';
 
 
 

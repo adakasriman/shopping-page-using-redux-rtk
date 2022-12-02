@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import './style.css'
 import { useNavigate } from 'react-router-dom'
-import { Button } from './Button'
+import { Button } from '../button/Button'
 
 export const Header: React.FC = () => {
     const [searchData, setSearchData] = useState<string>("")

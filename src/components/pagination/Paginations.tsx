@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate';
-import { ProductArray } from '../models/product.model';
-import { Button } from './Button';
+import { ProductArray } from '../../models/product.model';
+import { Button } from '../button/Button';
 
 type Props = {
     products: ProductArray[] | undefined,
