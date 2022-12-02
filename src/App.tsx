@@ -4,11 +4,10 @@ import './components/components-styles/style.css'
 import { Header } from './components/header/Header';
 import { Routes, Route } from "react-router-dom";
 import { Products } from './components/products/ProductsContainer';
-import { Search } from './components/search/Search';
-import { AddProduct } from './components/add-product/AddProduct';
 import { ProductViewContainer } from './components/product-view/ProductViewContainer';
 import { CategoriesContainer } from './components/categories/categories/CategoriesContainer';
 import { SearchContainer } from './components/search/SearchContainer';
+import { AddProductContainer } from './components/add-product/AddProductContainer';
 
 function App() {
 
@@ -25,7 +24,7 @@ function App() {
           <Route path='/products/search' element={<SearchContainer />} />
           <Route path="/products/categories" element={<CategoriesContainer />} />
           <Route path="/products/category/:category" element={<CategoriesContainer />} />
-          <Route path="/products/add" element={<AddProduct />} />
+          <Route path="/products/add" element={<AddProductContainer />} />
         </Routes>
       </section>
       {/* <Categories /> */}

@@ -1,33 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { useAddProductMutation } from '../../services/productsApi';
-import { useNavigate } from 'react-router-dom'
 import { Button } from '../button/Button';
+import { MutationTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, MutationDefinition } from '@reduxjs/toolkit/dist/query';
 
 
-export const AddProduct: React.FC = () => {
-    const { register, handleSubmit } = useForm(); // form hook
-
-    const [addProduct, response] = useAddProductMutation();
-    const navigate = useNavigate();
-
+type Props = {
+    addProduct: MutationTrigger<MutationDefinition<any, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, "product", any, "productsApi">>
+}
+export const AddProduct: React.FC<Props> = ({ addProduct }) => {
+    const { register, handleSubmit } = useForm(); // form hoo
 
     const onSubmit = async (formData: FieldValues) => {
         await addProduct(formData);
     };
-
-    useEffect(() => {
-      
-        if (response?.data?.id) {
-
-            sessionStorage.setItem("newProduct", JSON.stringify(response.data));
-            navigate(`/products`);
-        }
-
-    }, [response?.data?.id])
-
-
-
 
     return (
         <div className='add_products'>
@@ -70,7 +56,7 @@ export const AddProduct: React.FC = () => {
                 </div>
                 <div className='add_button'>
                     {/* <button type="submit">Add product</button> */}
-                    <Button type="submit" title='Add product'/>
+                    <Button type="submit" title='Add product' />
                 </div>
             </form>
         </div>
