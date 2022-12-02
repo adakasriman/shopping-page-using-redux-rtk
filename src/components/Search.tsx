@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchQuery } from '../services/productsApi';
 import { useSearchParams } from 'react-router-dom';
-import { Product } from './Product';
+import { Product } from './products/Product';
 import { ApiDataObject, ProductArray } from '../models/product.model';
 // import { Filters } from './Filters';
 

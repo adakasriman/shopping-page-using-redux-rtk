@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { ApiDataObject } from '../models/product.model';
 import { useCategoryQuery } from '../services/productsApi';
 // import { Filters } from './Filters';
-import { Product } from './Product';
+import { Product } from './products/Product';
 
 export const Category: React.FC = () => {
     const [productData, setProductData] = useState<ApiDataObject>();

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { ApiDataObject, ProductArray } from '../models/product.model';
-import { useDeleteMutation, useEditMutation } from '../services/productsApi';
+import { ApiDataObject, ProductArray } from '../../models/product.model';
+import { useDeleteMutation, useEditMutation } from '../../services/productsApi';
 import { useNavigate } from 'react-router-dom';
 
-import { Popup } from './Popup';
-import { Button } from './Button';
+import { Popup } from '../Popup';
+import { Button } from '../Button';
 
 
 interface Props {
@@ -21,24 +21,14 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
     const [deletePost, response] = useDeleteMutation();
     const [updateProduct, updateResponse] = useEditMutation();
 
-
-
     // edit 
     const [updateItem, setUpdateItem] = useState<string>();
-    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [product, setProduct] = useState<any>();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    // const { register, handleSubmit, setValue, reset } = useForm({
-    //     mode: "onChange",
-    //     defaultValues: {
-    //         productDetails: product
-    //     }
-    // });
 
     // close
     useEffect(() => {
-
-
         apiData = JSON.parse(JSON.stringify(apiData));
         if (response?.data?.isDeleted == true) {
             const index = apiData.products.findIndex((item: any) => item.id == response?.data?.id);
@@ -62,10 +52,6 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
         }
 
     }, [updateResponse?.data])
-
-    const viewProduct = (id: number) => {
-        navigate(`/products/product/${id}`);
-    }
 
     // edit page
 
@@ -92,8 +78,13 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
         // await addProduct(product);
     };
 
+
     const deleteproductHanculer = (id: number) => {
         deletePost(id);
+    }
+
+    const viewProduct = (id: number) => {
+        navigate(`/products/product/${id}`);
     }
 
 
@@ -144,31 +135,7 @@ export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiDat
                                     <label>Title</label>
                                     <input type="text" value={updateItem} onChange={(e) => setUpdateItem((e.target.value))} name="title" />
                                 </div>
-                                {/* <div className='item'>
-                                    <label>Price</label>
-                                    <input type="text" {...register("productDetails.price")} name="price" />
-                                </div>
-                                <div className='item'>
-                                    <label>brand</label>
-                                    <input type="text" {...register("productDetails.brand")} name="brand" />
-                                </div>
-                                <div className='item'>
-                                    <label>Stock</label>
-                                    <input type="text" {...register("productDetails.stock")} name="stock" />
-                                </div>
-                                <div className='item'>
-                                    <label>Rating</label>
-                                    <input type="text" {...register("productDetails.rating")} name="rating" />
-                                </div>
-                                <div className='item'>
-                                    <label>Category</label>
-                                    <input type="text" {...register("productDetails.category")} name="category" />
-                                </div>
-                                <div className='item'>
-                                    <label>Description</label>
-                                    <textarea {...register("productDetails.description")} name="description" />
-                                </div> */}
-
+                                
                                 {/* <button type='submit'>Update</button> */}
                                 <Button type="submit" title='Update' />
 

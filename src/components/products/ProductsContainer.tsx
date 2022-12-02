@@ -1,36 +1,56 @@
 import React, { useState, useEffect } from 'react'
-import { useProductsQuery } from '../services/productsApi';
+import { useDeleteMutation, useEditMutation, useProductsQuery } from '../../services/productsApi';
 import { Product, } from './Product';
 import { useNavigate } from 'react-router-dom';
-import { ApiDataObject, ProductArray } from '../models/product.model';
-import { Filters } from './Filters';
-import { Paginations } from './Paginations';
+import { ApiDataObject, ProductArray } from '../../models/product.model';
+import { Filters } from '../Filters';
+import { Paginations } from '../Paginations';
 
 
 export const Products: React.FC = () => {
+    //handling api Data
     const [productData, setProductData] = useState<ApiDataObject>();
+
+    // Handling Filters
     const [filtersData, setFiltersData] = useState<ApiDataObject | null>();
+
+    //
     const [product, setProduct] = useState<any>();
 
     const [perPageData, setPerPageData] = useState<ProductArray[]>()
 
     const [PerPage, setPerPage] = useState<number>(1);
+
+    //update product
+    const [updateItem, setUpdateItem] = useState<string>();
+    const [storeUpdateProduct, setStoreUpdateProduct] = useState<any>();
+
     const navigate = useNavigate();
 
-    let { data,isLoading } = useProductsQuery();
 
+    // API's fatching
+
+    //--> fetching data, updateing and delete 
+    let { data, isLoading } = useProductsQuery();
+    const [deletePost, response] = useDeleteMutation();
+    const [updateProduct, updateResponse] = useEditMutation();
+
+    //---> data assing to hook variable
     useEffect(() => {
-
         if (data) {
             setProductData(data);
             // setPerPageData(data?.products?.slice(PerPage * 8 - 8, PerPage * 8));
         }
-
         let newProduct = JSON.parse(JSON.stringify(sessionStorage.getItem("newProduct")));
 
         setProduct(JSON.parse(newProduct));
 
     }, [data])
+
+    //---< close:  fetching products data
+
+    //---> updating products data based on filters
+
     useEffect(() => {
 
         if (filtersData) {
@@ -40,16 +60,22 @@ export const Products: React.FC = () => {
         }
     }, [filtersData]);
 
+    //---< close: updating products data based on filters
+
+
+    //---> paginations
+
     useEffect(() => {
         if (productData?.products) {
             setPerPageData(productData?.products?.slice(PerPage * 8 - 8, PerPage * 8));
         }
     }, [PerPage, data, filtersData, productData]);
 
+    //---< close: paginations
 
+
+    //---> Adding new product into existed array
     useEffect(() => {
-
-
         if (product && productData) {
 
             var apidata = JSON.parse(JSON.stringify(productData));
@@ -64,41 +90,58 @@ export const Products: React.FC = () => {
                 }
 
             }
-
             if (apidata) {
 
                 setProductData(apidata);
             }
-
-
         }
-
-        // if (productData) {
-        //     setProductData(apidata);
-        // }
     }, [product, PerPage]);
 
-
-    // const search = useLocation().search;
-
-    // const { state } = useLocation();
-    // const { query } = state || {};
+    //---< close: addProduct
 
 
+    //--->Delete Product 
 
-    const categories = () => {
-        navigate(`/products/categories`);
-        // navigate(`/filter`);
-    }
+    // useEffect(() => {
+    //     apiData = JSON.parse(JSON.stringify(apiData));
+    //     if (response?.data?.isDeleted == true) {
+    //         const index = apiData.products.findIndex((item: any) => item.id == response?.data?.id);
+    //         if (index > -1) { // only splice array when item is found
+    //             apiData.products.splice(index, 1); // 2nd parameter means remove one item only
+    //         }
+    //         setProductData(apiData);
+    //     }
+
+    // }, [response?.data])
+
+    // const deleteproductHanculer = (id: number) => {
+    //     deletePost(id);
+    // }
+
+    //---> close: Delete Product
+
+    //--->Update Product 
+
+    // useEffect(() => {
+    //     apiData = JSON.parse(JSON.stringify(apiData));
+    //     if (updateResponse?.data?.id) {
+    //         const index = apiData.products.findIndex((item: any) => item.id == updateResponse?.data?.id);
+    //         if (index > -1) { // only splice array when item is found
+    //             apiData.products.splice(index, 1, updateResponse?.data); // 2nd parameter means remove one item only
+    //         }
+    //         setProductData(apiData);
+
+    //     }
+
+    // }, [updateResponse?.data])
+
+    //---> close: Update Product
 
 
-
+    // 
     const getFilterData = (filter_data: ApiDataObject | null) => {
-
         // setProductData(filtersData);
         setFiltersData(filter_data);
-
-
     }
 
     return (
