@@ -4,7 +4,7 @@ import { ApiDataObject } from '../../../models/product.model';
 import { useCategoryQuery, useDeleteMutation, useEditMutation } from '../../../services/productsApi';
 import { Category } from './Category';
 
-export const CategoriesProductsContainer = () => {
+export const CategoriesProductsContainer:React.FC = () => {
     const [productData, setProductData] = useState<ApiDataObject>();
     const { category } = useParams<string>();
 

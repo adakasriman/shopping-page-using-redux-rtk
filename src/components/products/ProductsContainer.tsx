@@ -151,7 +151,7 @@ export const Products: React.FC = () => {
             ) : productData ? (
                 <>
                     <div className="filters">
-                        <Filters getFilterData={(filtersData: any) => getFilterData(filtersData)} />
+                        <Filters getFilterData={(filtersData: ApiDataObject) => getFilterData(filtersData)} />
                     </div>
                     <div className="products bg_color-f2f2f2">
                         {/* <button className='filter_button' onClick={() => categories()}>

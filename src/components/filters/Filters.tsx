@@ -8,7 +8,7 @@ import { Button } from '../button/Button';
 
 type Props = {
     // getFilterData: ApiDataObject
-    getFilterData: any
+    getFilterData: ApiDataObject | any
 
 }
 
@@ -30,7 +30,7 @@ export const Filters: React.FC<Props> = ({ getFilterData }) => {
     });
 
 
-    const { data, error, isLoading, isFetching, isSuccess } = useSerchFilterQuery(formData);
+    const { data} = useSerchFilterQuery(formData);
 
     useEffect(() => {
 

@@ -1,27 +1,16 @@
-import { type } from '@testing-library/user-event/dist/types/setup/directApi';
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 import { ApiDataObject, ProductArray } from '../../../models/product.model';
-import { useCategoryQuery, useDeleteMutation, useEditMutation } from '../../../services/productsApi';
-// import { Filters } from './Filters';
 import { Product } from '../../products/Product';
 import { MutationTrigger } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, MutationDefinition } from '@reduxjs/toolkit/dist/query';
 
 type Props = {
     productData: ApiDataObject,
-    deletePost:MutationTrigger<MutationDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, "product", ProductArray, "productsApi">>,
-    updateProduct:MutationTrigger<MutationDefinition<any, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, "product", ProductArray, "productsApi">>
+    deletePost: MutationTrigger<MutationDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, "product", ProductArray, "productsApi">>,
+    updateProduct: MutationTrigger<MutationDefinition<any, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, "product", ProductArray, "productsApi">>
 }
 
-export const Category: React.FC<Props> = ({ productData,deletePost, updateProduct}) => {
-
-
-
-
-    // const getFilterData = (filtersData: any) => {
-    //     console.log(filtersData);
-    // }
+export const Category: React.FC<Props> = ({ productData, deletePost, updateProduct }) => {
 
     return (
 
