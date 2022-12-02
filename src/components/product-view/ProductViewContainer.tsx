@@ -13,11 +13,15 @@ export const ProductViewContainer = () => {
         if (data) {
             setProductData(data);
         }
-    }, [data])
+    }, [data]);
 
     return (
         <div>
-            <ProductViewList  productData={productData} />
+            {isLoading ? (
+                <div className='loading'>Loading...</div>
+            ) : productData &&
+            < ProductViewList productData={productData} />
+            }
         </div>
     )
 }

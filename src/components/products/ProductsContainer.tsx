@@ -163,7 +163,7 @@ export const Products: React.FC = () => {
                                     {
                                         product?.isDeleted ?
                                             <></> : <a>
-                                                <Product singleProduct={product} apiData={productData} setProductData={setProductData} deletePost={deletePost} updateProduct={updateProduct} />
+                                                <Product singleProduct={product} apiData={productData} deletePost={deletePost} updateProduct={updateProduct} />
                                             </a>
                                     }
                                 </div>

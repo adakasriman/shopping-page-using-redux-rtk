@@ -1,11 +1,12 @@
 import React from 'react'
-import { useCategoriesQuery } from '../../../services/productsApi';
 
 import { useNavigate } from 'react-router-dom';
 
+type Props = {
+    categoryTypes: string[]
+}
 
-export const Categories: React.FC = () => {
-    const { data, isLoading } = useCategoriesQuery();
+export const Categories: React.FC<Props> = ({ categoryTypes }) => {
 
     const navigate = useNavigate();
 
@@ -13,21 +14,15 @@ export const Categories: React.FC = () => {
         navigate(`/products/category/${product}`);
     }
     return (
-
-        <div>
-            {isLoading ? (
-                <div className='loading'>Loading...</div>
-            ) : <div className='categories'>
-                {
-                    data?.map((product, index) => {
-                        return <div key={index} className='item'>
-                            <a onClick={() => viewProduct(product)}>
-                                <div>{product}</div>
-                            </a>
-                        </div>
-                    })
-                }
-            </div>
+        <div className='categories'>
+            {
+                categoryTypes?.map((product, index) => {
+                    return <div key={index} className='item'>
+                        <a onClick={() => viewProduct(product)}>
+                            <div>{product}</div>
+                        </a>
+                    </div>
+                })
             }
         </div>
     )

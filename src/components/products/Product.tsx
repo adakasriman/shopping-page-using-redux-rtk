@@ -11,7 +11,6 @@ import { BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, Mutati
 
 interface Props {
     singleProduct: ProductArray,
-    setProductData: React.Dispatch<React.SetStateAction<ApiDataObject | undefined>>,
     apiData: ApiDataObject,
     deletePost:MutationTrigger<MutationDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, "product", ProductArray, "productsApi">>,
     updateProduct:MutationTrigger<MutationDefinition<any, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, "product", ProductArray, "productsApi">>
@@ -20,7 +19,7 @@ interface Props {
 
 // close:  edit type
 
-export const Product: React.FC<Props> = ({ singleProduct, setProductData, apiData, deletePost,updateProduct }) => {
+export const Product: React.FC<Props> = ({ singleProduct,  apiData, deletePost,updateProduct }) => {
     const navigate = useNavigate();
 
     // edit 
