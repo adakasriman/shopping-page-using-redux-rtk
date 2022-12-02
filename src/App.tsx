@@ -8,6 +8,7 @@ import { ProductViewContainer } from './components/product-view/ProductViewConta
 import { CategoriesContainer } from './components/categories/categories/CategoriesContainer';
 import { SearchContainer } from './components/search/SearchContainer';
 import { AddProductContainer } from './components/add-product/AddProductContainer';
+import { CategoriesProductsContainer } from './components/categories/categories-products/CategoriesProductsContainer';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
           <Route path='/products/product/:id' element={<ProductViewContainer />} />
           <Route path='/products/search' element={<SearchContainer />} />
           <Route path="/products/categories" element={<CategoriesContainer />} />
-          <Route path="/products/category/:category" element={<CategoriesContainer />} />
+          <Route path="/products/category/:category" element={<CategoriesProductsContainer />} />
           <Route path="/products/add" element={<AddProductContainer />} />
         </Routes>
       </section>

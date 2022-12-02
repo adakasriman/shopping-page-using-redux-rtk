@@ -4,11 +4,15 @@ import { CategoriesList } from './CategoriesList';
 
 export const CategoriesContainer = () => {
     const [categoryTypes, setCategoryTypes] = useState<string[]>();
+
     const { data, isLoading } = useCategoriesQuery();
 
 
     useEffect(() => {
         if (data) {
+
+            console.log(data);
+            debugger
             setCategoryTypes(data);
         }
     }, [data])
